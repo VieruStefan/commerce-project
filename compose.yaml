@@ -1,0 +1,32 @@
+services:
+  django-app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: django-app
+    command: python manage.py runserver 0.0.0.0:7200
+    ports:
+      - "7200:7200"
+    environment:
+      - DJANGO_SETTINGS_MODULE=mysite.settings
+      - DEBUG=1
+    volumes:
+      - $HOME/.aws/credentials:/home/app/.aws/credentials:ro
+    networks:
+      - my_network
+
+  angular-app:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: angular-app
+    ports:
+      - "4200:4200"
+    depends_on:
+      - django-app
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
