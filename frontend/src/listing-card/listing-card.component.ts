@@ -10,7 +10,12 @@ import { Listing } from '../listing/listing';
 })
 export class ListingCardComponent {
   @Input({required: true}) listing!: Listing;
+  time_ago: any;
 
+  ngOnInit(){
+    this.time_ago = setInterval(this.timeAgo(this.listing!.pub_date)
+  , 1000);
+  }
   timeAgo(date: string): string {
     const now = new Date();
     const past = new Date(date);
