@@ -5,7 +5,7 @@ import { catchError } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  url: string = "http://localhost:7200/olx"
+  url: string = "http://54.243.193.76:7200/olx"
   httpOptions = {
     headers: new HttpHeaders({
 
