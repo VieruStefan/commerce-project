@@ -31,11 +31,17 @@ export class CreateListingComponent {
 
     if (this.file instanceof File) {
       this.fileName = this.file.name;
+      console.log(this.file);
       this.formListing.patchValue({ picture: this.file });
     }
   }
   
   submit(){
+    const formDataListing = new FormData();
+    formDataListing.append('title', this.formListing.get('title')?.value);
+    formDataListing.append('file', this.file);
+    formDataListing.append('seller', "Stefan Vieru");
+    formDataListing.append('description', this.formListing.get('description')?.value);
     const body = {
       title: this.formListing.get('title')?.value,
       description: this.formListing.get('description')?.value,
@@ -43,7 +49,7 @@ export class CreateListingComponent {
       image_url: this.fileName
     }
 
-    this.api.postListing(body).subscribe({
+    this.api.postListing(formDataListing).subscribe({
         complete: () => console.info('complete'),
         next: (res) => console.log(res),
         error: (e) => console.error('Error:', e)   
