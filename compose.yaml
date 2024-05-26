@@ -11,7 +11,7 @@ services:
       - DJANGO_SETTINGS_MODULE=mysite.settings
       - DEBUG=1
     volumes:
-      - $HOME/.aws/credentials:/home/app/.aws/credentials:ro
+      - $HOME/.aws/:/home/app/.aws/:ro
     networks:
       - my_network
 
