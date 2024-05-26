@@ -22,6 +22,7 @@ COPY pyproject.toml poetry.lock /app/
 
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
+RUN poetry run python manage.py migrate
 
 EXPOSE 7200
 CMD ["python", "manage.py", "runserver", "0.0.0.0:7200"]
