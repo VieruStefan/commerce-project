@@ -35,10 +35,10 @@ public class ListingController {
         PutObjectRequest objReq = PutObjectRequest.builder()
                 .bucket("oferte-directe-bucket")
                 .key("hello.txt")
+                .acl("public-read")
                 .build();
         String message = "hello";
         InputStream inputStream = new ByteArrayInputStream(message.getBytes(StandardCharsets.UTF_8));
-
         s3Client.putObject(objReq, software.amazon.awssdk.core.sync.RequestBody.fromInputStream(inputStream, message.length()));
     }
 }
