@@ -20,7 +20,7 @@ services:
     ports:
       - "4200:4200"
     depends_on:
-      - django-app
+      - spring-app
     networks:
       - my_network
 
