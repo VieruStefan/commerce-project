@@ -4,8 +4,5 @@ COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:17-alpine
-WORKDIR /app
-COPY --from=build /app/target/*.jar /app/app.jar
 EXPOSE 7200
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["mvn", "spring-boot:run"]

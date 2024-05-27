@@ -1,15 +1,12 @@
 services:
-  django-app:
+  spring-app:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: django-app
-    command: python manage.py runserver 0.0.0.0:7200
+    container_name: spring-app
+    command: mvn spring-boot:start
     ports:
       - "7200:7200"
-    environment:
-      - DJANGO_SETTINGS_MODULE=mysite.settings
-      - DEBUG=1
     volumes:
       - $HOME/.aws/:/home/app/.aws/:ro
     networks:
