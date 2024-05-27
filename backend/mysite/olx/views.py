@@ -1,11 +1,16 @@
 from django.utils import timezone
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.core import serializers
-from .models import Post, Seller
 from django.views.decorators.csrf import csrf_exempt
+
 import json
 import boto3
+
+from .forms import UserRegisterForm
+from .models import Post, Seller
+from .forms import UserRegisterForm
 
 headers = {
             "Content-Type": "application/json",
@@ -18,7 +23,7 @@ def index(request: HttpRequest):
     if request.method == "GET":
         posts_list = serializers.serialize("json", Post.objects.all())
         return HttpResponse(posts_list, headers)
-    elif request.method == "POST":
+    elif request.method == "POST" and request.user.is_authenticated:
         body = json.loads(request.body)
         try:
             seller = Seller.objects.get(name=body["seller"])
@@ -93,4 +98,18 @@ def aws_s3(request: HttpRequest, photo_id: str):
     elif request.method == "POST":
         pass
     return HttpResponse("S3 not working right now.", headers, status=404)
-    
+
+@csrf_exempt
+def register(request: HttpRequest):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            return HttpResponse("Your account has been created!", headers, status=201)
+        else:
+            print(form.errors)
+        
+    return HttpResponse(str(form.errors))
+
+
