@@ -4,7 +4,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: spring-app
-    command: mvn spring-boot:start
+    command: mvn spring-boot:run
     ports:
       - "7200:7200"
     volumes:
