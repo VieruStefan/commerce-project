@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
 @RestController
-@RequestMapping
+@RequestMapping("/listings")
 public class ListingController {
     private final ListingService listingService;
     private final S3Client s3Client;
@@ -33,7 +36,9 @@ public class ListingController {
                 .bucket("oferte-directe-bucket")
                 .key("hello.txt")
                 .build();
-        s3Client.putObject(objReq, Paths.get("hello.txt"));
+        String message = "hello";
+        InputStream inputStream = new ByteArrayInputStream(message.getBytes(StandardCharsets.UTF_8));
 
+        s3Client.putObject(objReq, software.amazon.awssdk.core.sync.RequestBody.fromInputStream(inputStream, message.length()));
     }
 }
