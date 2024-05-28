@@ -9,4 +9,5 @@ public interface ListingService {
     Listing create(Listing listing);
     List<Listing> getAll();
     Optional<Listing> getById(Long id);
+    Listing save(Listing listing);
 }

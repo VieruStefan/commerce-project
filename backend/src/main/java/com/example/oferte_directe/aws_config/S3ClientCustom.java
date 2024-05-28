@@ -12,9 +12,9 @@ import java.io.InputStream;
 
 @Configuration
 public class S3ClientCustom {
-    private S3Client s3Client;
-    private String bucketName;
-    private Region region;
+    private final S3Client s3Client;
+    private final String bucketName;
+    private final Region region;
     @Autowired
     S3ClientCustom(S3Client s3Client){
         this.bucketName = "oferte-directe-bucket";
@@ -28,7 +28,7 @@ public class S3ClientCustom {
 //                .build();
 //    }
 
-    public boolean put_object(String key, InputStream inputStream) throws IOException {
+    public void put_object(String key, InputStream inputStream) throws IOException {
         PutObjectRequest objReq = PutObjectRequest.builder()
                 .bucket(this.bucketName)
                 .key(key)
@@ -36,11 +36,9 @@ public class S3ClientCustom {
                 .build();
 
         s3Client.putObject(objReq, RequestBody.fromInputStream(inputStream, inputStream.available()));
-        return true;
     }
 
     public String get_object_url(String key){
-        String fileUrl = String.format("https://%s.s3.%s.amazonaws.com/%s", bucketName, region, key);
-        return fileUrl;
+        return String.format("https://%s.s3.%s.amazonaws.com/%s", bucketName, region, key);
     }
 }

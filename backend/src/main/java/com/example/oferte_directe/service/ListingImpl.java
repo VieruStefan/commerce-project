@@ -29,4 +29,9 @@ public class ListingImpl implements ListingService{
     public Optional<Listing> getById(Long id) {
        return listingRepository.findById(id);
     }
+
+    @Override
+    public Listing save(Listing listing) {
+        return this.listingRepository.save(listing);
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 
 @RestController
@@ -24,11 +25,17 @@ public class ListingController {
     }
 
     @PostMapping(path="/", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public void create(@RequestPart Listing listing, @RequestPart("picture") MultipartFile picture) throws IOException {
+    public Listing create(@RequestPart Listing listing, @RequestPart("picture") MultipartFile picture) throws IOException {
         //s3
         Listing listing_db = listingService.create(listing);
         String listing_key = "listing_"+listing_db.getId()+".png";
         s3ClientCustom.put_object(listing_key, picture.getInputStream());
         listing_db.setImage_url(s3ClientCustom.get_object_url(listing_key));
+        return listingService.save(listing_db);
+    }
+
+    @GetMapping(path = "/")
+    public List<Listing> get_listings(){
+        return listingService.getAll();
     }
 }
