@@ -1,10 +1,10 @@
-package com.example.olx;
+package com.example.oferte_directe;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OlxApplicationTests {
+class OferteDirecteApplicationTests {
 
 	@Test
 	void contextLoads() {
