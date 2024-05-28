@@ -11,6 +11,26 @@
                 <!-- <label for="description">Descriere</label> -->
             </div>
 
+            <div class="form-floating mb-3">
+                <input type="number" formControlName="price" class="form-control" id="price" placeholder="Preț" name="price">
+                <!-- <label for="price">Pret</label> -->
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="user_name" class="form-control" id="user_name" placeholder="Nume" name="user_name">
+                <!-- <label for="user_name">Nume</label> -->
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="user_surname" class="form-control" id="user_surname" placeholder="Prenume" name="user_surname">
+                <!-- <label for="user_surname">Prenume</label> -->
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="email" formControlName="email" class="form-control" id="email" placeholder="Email" name="email">
+                <!-- <label for="email">Prenume</label> -->
+            </div>
+
             <div class="form-group">
                 <label><b>Incarcă o poză:</b></label>
                 <input type="file" formControlName="picture" (change)="onFileSelected($event)">

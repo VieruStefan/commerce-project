@@ -41,16 +41,16 @@ export class CreateListingComponent {
   
   submit(){
     const formDataListing = new FormData();
-    formDataListing.append('title', this.formListing.get('title')?.value);
-    formDataListing.append('file', this.file);
-    formDataListing.append('seller', "Stefan Vieru");
-    formDataListing.append('description', this.formListing.get('description')?.value);
+    // formDataListing.append('title', this.formListing.get('title')?.value);
+    // formDataListing.append('description', this.formListing.get('description')?.value);
+    // formDataListing.append('price', this.formListing.get('price')?.value);
+    // formDataListing.append('user_id', "1");
 
     const listing = {
       title: this.formListing.get('title')?.value,
       description: this.formListing.get('description')?.value,
-      seller: "Stefan Vieru",
-      image_url: this.fileName
+      price: parseInt(this.formListing.get('price')?.value),
+      user_id: 1
     }
     const body = new Blob([JSON.stringify(listing)], { type: "application/json" });
     formDataListing.append('listing', body);

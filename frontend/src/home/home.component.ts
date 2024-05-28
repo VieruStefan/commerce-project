@@ -36,7 +36,8 @@ export class HomeComponent {
               id: fields.id,
               title: fields.title,
               description: fields.description,
-              seller: fields.seller,
+              price: fields.price,
+              user_id: fields.user_id,
               image_url: fields.image_url,
               updated_date: fields.updated_date,
               pub_date: fields.pub_date
