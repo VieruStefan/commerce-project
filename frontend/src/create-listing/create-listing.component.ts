@@ -3,6 +3,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-listing',
@@ -16,7 +17,9 @@ export class CreateListingComponent {
   file!: File;
   fileName!: string;
 
-  constructor(private formBuilder: FormBuilder, private api: ApiService){}
+  constructor(private formBuilder: FormBuilder,
+     private api: ApiService,
+      private router: Router){}
 
   ngOnInit(){
     this.formListing = this.formBuilder.group({
@@ -42,7 +45,7 @@ export class CreateListingComponent {
     formDataListing.append('file', this.file);
     formDataListing.append('seller', "Stefan Vieru");
     formDataListing.append('description', this.formListing.get('description')?.value);
-    
+
     const listing = {
       title: this.formListing.get('title')?.value,
       description: this.formListing.get('description')?.value,
@@ -55,7 +58,10 @@ export class CreateListingComponent {
       formDataListing.append('picture', this.file);
     }
     this.api.postListing(formDataListing).subscribe({
-        complete: () => console.info('complete'),
+        complete: () => {
+          console.info('complete');
+          this.router.navigate(['/']);
+        },
         next: (res) => console.log(res),
         error: (e) => console.error('Error:', e)   
       }
