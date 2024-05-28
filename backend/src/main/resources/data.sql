@@ -1,8 +1,8 @@
 SELECT CURRENT_TIMESTAMP AT TIME ZONE 'Europe/Bucharest';
 
-INSERT INTO "user" (first_name, last_name, email) VALUES ('Stefan', 'Vieru', 'stefan@gmail.com');
-INSERT INTO "user" (first_name, last_name, email) VALUES ('Dana', 'Maritca', 'dana@gmail.com');
-INSERT INTO "user" (first_name, last_name, email) VALUES ('Bob', 'Johnson', 'bob@gmail.com');
+INSERT INTO "user" (first_name, last_name, email) VALUES ('Stefan', 'Vieru', 'stefanstef62@gmail.com');
+INSERT INTO "user" (first_name, last_name, email) VALUES ('Dana', 'Maritca', 'danamaritca@gmail.com');
+INSERT INTO "user" (first_name, last_name, email) VALUES ('Bob', 'Johnson', 'stefan.vieru@student.tuiasi.ro');
 
 -- Assuming user_id corresponds to the IDs of users inserted above
 INSERT INTO listing (title, description, price, user_id, image_url, pub_date, updated_date)

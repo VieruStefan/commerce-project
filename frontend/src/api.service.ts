@@ -46,4 +46,13 @@ export class ApiService {
       })
     );
   }
+
+  public postUser(body: any){
+    return this.http.post<any>(`${this.url_users}/`, body, this.httpOptions).pipe(
+      catchError((error) => {
+        console.error('API Error:', error);
+        throw new Error("Something went wrong. Please try again later.");
+      })
+    );
+  }
 }
