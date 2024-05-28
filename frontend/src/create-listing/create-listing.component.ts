@@ -24,7 +24,11 @@ export class CreateListingComponent {
   ngOnInit(){
     this.formListing = this.formBuilder.group({
       title: ['', Validators.required],
+      price: [0, Validators.required],
       description: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.required],
       picture: [null]
     })
   }
