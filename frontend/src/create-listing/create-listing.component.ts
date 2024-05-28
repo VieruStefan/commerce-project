@@ -57,26 +57,27 @@ export class CreateListingComponent {
     this.api.getUserByDetails(firstName, lastName, email).subscribe({
         complete: () => console.info('completed fetching user'),
         next: (res) => {
-            const listing = {
-              title: this.formListing.get('title')?.value,
-              description: this.formListing.get('description')?.value,
-              price: parseInt(this.formListing.get('price')?.value),
-              user_id: res.id
+          console.log('fetched user:', res);
+          const listing = {
+            title: this.formListing.get('title')?.value,
+            description: this.formListing.get('description')?.value,
+            price: parseInt(this.formListing.get('price')?.value),
+            user_id: res.id
+          }
+          const body = new Blob([JSON.stringify(listing)], { type: "application/json" });
+          formDataListing.append('listing', body);
+          if (this.file) {
+            formDataListing.append('picture', this.file);
+          }
+          this.api.postListing(formDataListing).subscribe({
+              complete: () => {
+                console.info('complete');
+                this.router.navigate(['/']);
+              },
+              next: (res) => console.log(res),
+              error: (e) => console.error('Error:', e)   
             }
-            const body = new Blob([JSON.stringify(listing)], { type: "application/json" });
-            formDataListing.append('listing', body);
-            if (this.file) {
-              formDataListing.append('picture', this.file);
-            }
-            this.api.postListing(formDataListing).subscribe({
-                complete: () => {
-                  console.info('complete');
-                  this.router.navigate(['/']);
-                },
-                next: (res) => console.log(res),
-                error: (e) => console.error('Error:', e)   
-              }
-            );
+          );
         },
         error: (e) => console.error('Error:', e)
       });
