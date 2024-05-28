@@ -25,23 +25,22 @@ public class UserController {
 
     }
 
-    @GetMapping("/")
-    public List<User> get_users(){
-        return userService.getAll();
-    }
-
     @GetMapping("/{id}")
     public User get_user(@RequestParam Long id){
         return userService.getById(id).get();
     }
 
     @GetMapping("/")
-    public ResponseEntity<User> getUserByDetails(@RequestParam  String firstName,
+    public ResponseEntity<?> getUserByDetails(@RequestParam  String firstName,
                                                  @RequestParam  String lastName,
                                                  @RequestParam  String email) {
-        Optional<User> userOptional = userService.findByUserDetails(firstName, lastName, email);
-        return userOptional
-                .map(user -> ResponseEntity.ok().body(user))
-                .orElse(ResponseEntity.notFound().build());
+        if(firstName.isEmpty() && lastName.isEmpty() && email.isEmpty()){
+            return ResponseEntity.ok().body(userService.getAll());
+        }else {
+            Optional<User> userOptional = userService.findByUserDetails(firstName, lastName, email);
+            return userOptional
+                    .map(user -> ResponseEntity.ok().body(user))
+                    .orElse(ResponseEntity.notFound().build());
+        }
     }
 }
