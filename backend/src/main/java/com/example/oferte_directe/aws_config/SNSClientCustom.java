@@ -10,18 +10,18 @@ import software.amazon.awssdk.services.sns.model.PublishRequest;
 @Configuration
 public class SNSClientCustom {
     private final SnsClient snsClient;
-    private final String topic;
+    private final String topicArn;
     @Autowired
     SNSClientCustom(SnsClient snsClient){
         this.snsClient = snsClient;
-        this.topic = "oferte-directe-topic";
+        this.topicArn = "arn:aws:sns:us-east-1:137412757438:oferte-directe-topic";
     }
 
     public void send_sns_message(String subject, String message){
         PublishRequest publishRequest = PublishRequest.builder()
                 .subject(subject)
                 .message(message)
-                .topicArn(this.topic)
+                .topicArn(this.topicArn)
                 .build();
         snsClient.publish(publishRequest);
     }
