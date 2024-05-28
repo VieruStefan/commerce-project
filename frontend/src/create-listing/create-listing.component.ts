@@ -62,7 +62,7 @@ export class CreateListingComponent {
             title: this.formListing.get('title')?.value,
             description: this.formListing.get('description')?.value,
             price: parseInt(this.formListing.get('price')?.value),
-            user_id: res.id
+            user: res
           }
           const body = new Blob([JSON.stringify(listing)], { type: "application/json" });
           formDataListing.append('listing', body);
