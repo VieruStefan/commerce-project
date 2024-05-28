@@ -13,7 +13,10 @@ public class Listing {
     private Long id;
     private String title;
     private String description;
-    private String seller;
+    private int price;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
     private String image_url;
     private LocalDateTime pub_date;
     private LocalDateTime updated_date;
