@@ -32,7 +32,7 @@ export class CreateListingComponent {
     if (this.file instanceof File) {
       this.fileName = this.file.name;
       console.log(this.file);
-      this.formListing.patchValue({ picture: this.file });
+      // this.formListing.patchValue({ picture: this.file });
     }
   }
   
@@ -42,13 +42,18 @@ export class CreateListingComponent {
     formDataListing.append('file', this.file);
     formDataListing.append('seller', "Stefan Vieru");
     formDataListing.append('description', this.formListing.get('description')?.value);
-    const body = {
+    
+    const listing = {
       title: this.formListing.get('title')?.value,
       description: this.formListing.get('description')?.value,
       seller: "Stefan Vieru",
       image_url: this.fileName
     }
-
+    const body = new Blob([JSON.stringify(listing)], { type: "application/json" });
+    formDataListing.append('listing', body);
+    if (this.file) {
+      formDataListing.append('picture', this.file);
+    }
     this.api.postListing(formDataListing).subscribe({
         complete: () => console.info('complete'),
         next: (res) => console.log(res),
