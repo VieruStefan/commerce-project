@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/listings")
-@CrossOrigin(origins = "http://54.243.193.76:4200")
+//@CrossOrigin(origins = "http://54.243.193.76:4200")
 public class ListingController {
     private final ListingService listingService;
     private final S3ClientCustom s3ClientCustom;
