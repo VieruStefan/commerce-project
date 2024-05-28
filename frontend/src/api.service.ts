@@ -39,7 +39,7 @@ export class ApiService {
 
   public getUserByDetails(firstName: string, lastName: string, email: string){
     const params = { firstName, lastName, email };
-    return this.http.get<any>(this.url_users, { ...this.httpOptions, params }).pipe(
+    return this.http.get<any>(`${this.url_users}/`, { ...this.httpOptions, params }).pipe(
       catchError((error) => {
         console.error('API Error:', error);
         throw new Error("Something went wrong. Please try again later.");
