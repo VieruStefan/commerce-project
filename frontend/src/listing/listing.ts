@@ -1,9 +1,11 @@
+import { User } from "./user";
+
 export class Listing {
     id: number;
     title: string;
     description: string;
     price: number;
-    user_id: number;
+    user: User;
     image_url: string;
     updated_date: string;
     pub_date: string;
@@ -13,7 +15,7 @@ export class Listing {
       title: string,
       description: string,
       price: number,
-      user_id: number,
+      user: any,
       image_url: string,
       updated_date: string,
       pub_date: string
@@ -22,7 +24,7 @@ export class Listing {
       this.title = title;
       this.description = description;
       this.price = price;
-      this.user_id = user_id;
+      this.user = user;
       this.image_url = image_url;
       this.updated_date = updated_date;
       this.pub_date = pub_date;

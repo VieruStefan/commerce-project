@@ -37,7 +37,7 @@ export class HomeComponent {
               title: fields.title,
               description: fields.description,
               price: fields.price,
-              user_id: fields.user_id,
+              user: fields.user,
               image_url: fields.image_url,
               updated_date: fields.updated_date,
               pub_date: fields.pub_date
