@@ -40,7 +40,9 @@ public class ListingController {
         listing_db.setImage_url(s3ClientCustom.get_object_url(listing_key));
         Listing response = listingService.save(listing_db);
 
-        snsClientCustom.send_sns_message("Oferte Directe","S-a postat un nou anunț!");
+        snsClientCustom.send_sns_message("Oferte Directe",
+                "S-a postat un nou anunț! -> "+listing_db.getTitle()+
+                        "\nVizitează-ne la http://54.243.193.76:4200");
         return ResponseEntity.ok(response);
     }
 
