@@ -1,3 +1,5 @@
+SELECT CURRENT_TIMESTAMP AT TIME ZONE 'Europe/Bucharest';
+
 INSERT INTO "user" (first_name, last_name, email) VALUES ('Stefan', 'Vieru', 'stefan@gmail.com');
 INSERT INTO "user" (first_name, last_name, email) VALUES ('Dana', 'Maritca', 'dana@gmail.com');
 INSERT INTO "user" (first_name, last_name, email) VALUES ('Bob', 'Johnson', 'bob@gmail.com');
