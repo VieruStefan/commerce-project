@@ -23,14 +23,15 @@ export class HomeComponent {
     this.apiService.getListings().subscribe(
       (res) => {
         if(Array.isArray(res)){
-          this.listings = res.map((item) =>{
-            const fields = item.fields
+          this.listings = res.map((body) =>{
+            const fields = body
             return {
-              id: item.pk,
+              id: fields.id,
               title: fields.title,
               description: fields.description,
               seller: fields.seller,
               image_url: fields.image_url,
+              updated_date: fields.updated_date,
               pub_date: fields.pub_date
             } as Listing;
           })
