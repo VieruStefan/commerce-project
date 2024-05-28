@@ -9,4 +9,5 @@ public interface UserService {
     User create(User user);
     List<User> getAll();
     Optional<User> getById(Long id);
+    Optional<User> findByUserDetails(String firstName, String lastName, String email);
 }

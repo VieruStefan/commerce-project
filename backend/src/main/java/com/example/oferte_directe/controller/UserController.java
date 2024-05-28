@@ -3,9 +3,11 @@ package com.example.oferte_directe.controller;
 import com.example.oferte_directe.entity.User;
 import com.example.oferte_directe.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -31,5 +33,15 @@ public class UserController {
     @GetMapping("/{id}")
     public User get_user(@RequestParam Long id){
         return userService.getById(id).get();
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<User> getUserByDetails(@RequestParam  String firstName,
+                                                 @RequestParam  String lastName,
+                                                 @RequestParam  String email) {
+        Optional<User> userOptional = userService.findByUserDetails(firstName, lastName, email);
+        return userOptional
+                .map(user -> ResponseEntity.ok().body(user))
+                .orElse(ResponseEntity.notFound().build());
     }
 }

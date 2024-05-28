@@ -50,25 +50,36 @@ export class CreateListingComponent {
     // formDataListing.append('price', this.formListing.get('price')?.value);
     // formDataListing.append('user_id', "1");
 
-    const listing = {
-      title: this.formListing.get('title')?.value,
-      description: this.formListing.get('description')?.value,
-      price: parseInt(this.formListing.get('price')?.value),
-      user_id: 1
-    }
-    const body = new Blob([JSON.stringify(listing)], { type: "application/json" });
-    formDataListing.append('listing', body);
-    if (this.file) {
-      formDataListing.append('picture', this.file);
-    }
-    this.api.postListing(formDataListing).subscribe({
-        complete: () => {
-          console.info('complete');
-          this.router.navigate(['/']);
+    const firstName = this.formListing.get('firstName')?.value;
+    const lastName = this.formListing.get('lastName')?.value;
+    const email = this.formListing.get('email')?.value;
+
+    this.api.getUserByDetails(firstName, lastName, email).subscribe({
+        complete: () => console.info('completed fetching user'),
+        next: (res) => {
+            const listing = {
+              title: this.formListing.get('title')?.value,
+              description: this.formListing.get('description')?.value,
+              price: parseInt(this.formListing.get('price')?.value),
+              user_id: res.id
+            }
+            const body = new Blob([JSON.stringify(listing)], { type: "application/json" });
+            formDataListing.append('listing', body);
+            if (this.file) {
+              formDataListing.append('picture', this.file);
+            }
+            this.api.postListing(formDataListing).subscribe({
+                complete: () => {
+                  console.info('complete');
+                  this.router.navigate(['/']);
+                },
+                next: (res) => console.log(res),
+                error: (e) => console.error('Error:', e)   
+              }
+            );
         },
-        next: (res) => console.log(res),
-        error: (e) => console.error('Error:', e)   
-      }
-    );
+        error: (e) => console.error('Error:', e)
+      });
+    
   }
 }
