@@ -20,14 +20,14 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public void create_user(@RequestBody User user){
-        userService.create(user);
+    public ResponseEntity<User> create_user(@RequestBody User user){
+        return ResponseEntity.ok(userService.create(user));
 
     }
 
     @GetMapping("/{id}")
-    public User get_user(@RequestParam Long id){
-        return userService.getById(id).get();
+    public ResponseEntity<User> get_user(@RequestParam Long id){
+        return ResponseEntity.ok(userService.getById(id).get());
     }
 
     @GetMapping("/")

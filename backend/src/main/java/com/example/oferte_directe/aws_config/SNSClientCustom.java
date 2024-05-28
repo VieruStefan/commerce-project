@@ -14,11 +14,12 @@ public class SNSClientCustom {
     @Autowired
     SNSClientCustom(SnsClient snsClient){
         this.snsClient = snsClient;
-        this.topic = "oferte-directe-bucket";
+        this.topic = "oferte-directe-topic";
     }
 
-    public void send_sns_message(String message){
+    public void send_sns_message(String subject, String message){
         PublishRequest publishRequest = PublishRequest.builder()
+                .subject(subject)
                 .message(message)
                 .topicArn(this.topic)
                 .build();
