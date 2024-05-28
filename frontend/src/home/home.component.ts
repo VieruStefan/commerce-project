@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, IterableDiffer, IterableDiffers } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ListingCardComponent } from '../listing-card/listing-card.component';
 import { Listing } from '../listing/listing';
@@ -18,7 +18,14 @@ import { FormsModule, NgModel } from '@angular/forms';
 })
 export class HomeComponent {
   listings: Array<Listing> = [];
-  constructor(private apiService: ApiService, private http: HttpClient, private router: Router){  }
+  private differ: IterableDiffer<Listing>;
+  constructor(private apiService: ApiService,
+      private http: HttpClient,
+      private router: Router,
+      private differs: IterableDiffers,
+       private cdr: ChangeDetectorRef){
+    this.differ = this.differs.find(this.listings).create();
+    }
   ngOnInit(){
     this.apiService.getListings().subscribe(
       (res) => {
@@ -40,18 +47,18 @@ export class HomeComponent {
       }
     )
   }
-  loginData = { username: '', password: '' };
+  ngDoCheck(): void {
+    const changes = this.differ.diff(this.listings);
+    if (changes) {
+      changes.forEachAddedItem(record => {
+        console.log('New listing added:', record.item);
+        this.updatePage();
+      });
+    }
+  }
 
-  onSubmit() {
-    this.http.post(`${this.apiService.url}/accounts/login/`, this.loginData).subscribe(
-      (response) => {
-        console.log('Login successful:', response);
-        this.router.navigate(['/']);
-      },
-      (error) => {
-        console.error('Login failed:', error);
-        alert('Invalid username or password');
-      }
-    );
+  updatePage(): void {
+    this.cdr.detectChanges();
+
   }
 }
