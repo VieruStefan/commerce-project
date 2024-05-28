@@ -4,6 +4,7 @@ import com.example.oferte_directe.entity.Listing;
 import com.example.oferte_directe.repository.ListingRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,8 @@ public class ListingImpl implements ListingService{
 
     @Override
     public Listing create(Listing listing) {
-       return listingRepository.save(listing);
+        listing.setPub_date(LocalDateTime.now());
+        return listingRepository.save(listing);
     }
 
     @Override
@@ -32,6 +34,8 @@ public class ListingImpl implements ListingService{
 
     @Override
     public Listing save(Listing listing) {
+
+        listing.setUpdated_date(LocalDateTime.now());
         return this.listingRepository.save(listing);
     }
 }

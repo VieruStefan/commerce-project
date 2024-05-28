@@ -16,5 +16,6 @@ public class Listing {
     private String seller;
     private String image_url;
     private LocalDateTime pub_date;
+    private LocalDateTime updated_date;
 
 }
