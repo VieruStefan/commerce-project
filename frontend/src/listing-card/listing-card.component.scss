@@ -18,8 +18,11 @@
   max-height: 100%;
   object-fit: contain;
 }
+
 .card-text {
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
