@@ -1,10 +1,9 @@
 FROM node:22-alpine as build
 WORKDIR /app
 COPY . .
-# RUN npm install 
-# RUN npm install -g @angular/cli@18.0.0
-RUN npm ci
-RUN npm run build --production
+RUN npm install 
+RUN npm install -g @angular/cli@18.0.0
+RUN ng build
 # CMD ["npm", "start"]            
 
 FROM nginx:latest
