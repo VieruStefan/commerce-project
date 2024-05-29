@@ -5,7 +5,7 @@ RUN npm install
 RUN npm install -g @angular/cli@18.0.0
 # RUN ng build
 # RUN ng build
-CMD ["npm", "start"]            
+CMD ["node", "server.ts"]            
 
 # FROM nginx:latest
 # COPY nginx.conf /etc/nginx/nginx.conf
