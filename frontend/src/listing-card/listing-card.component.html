@@ -1,9 +1,10 @@
-<div class="container">
-    <img src="{{listing.image_url}}"/>
-    <div><b>{{listing.title}}</b></div>
-    <div>Descriere:</div>
-    <div>{{listing.description}}</div>
-    <div>Preț: {{listing.price}} lei</div>
-    <div>Vândut de: {{listing.user.firstName}} {{listing.user.lastName}}</div>
-    <div>Postatat acum {{timeAgo(listing.pub_date)}}</div>
+<div class="card">
+    <img class="card-img-top" [src]="listing.image_url" alt="Listing Image">
+    <div class="card-body">
+        <h5 class="card-title">{{listing.title}}</h5>
+        <p class="card-text">Descriere: {{listing.description}}</p>
+        <p class="card-text">Preț: {{listing.price}} lei</p>
+        <p class="card-text">Vândut de: {{listing.user.firstName}} {{listing.user.lastName}}</p>
+        <p class="card-text">Postatat acum {{timeAgo(listing.pub_date)}}</p>
+    </div>
 </div>
