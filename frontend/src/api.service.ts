@@ -5,7 +5,7 @@ import { catchError } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  url: string = "http://54.243.193.76:7200/listings";
+  url: string = "http://oferte-directe.api:7200/listings";
   httpOptions = {
     headers: new HttpHeaders({
 

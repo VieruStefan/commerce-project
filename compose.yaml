@@ -21,7 +21,8 @@ services:
     container_name: angular-app
     ports:
       - "80:80"
-    restart: on-failure
+    links:
+      - "spring-app:oferte-directe.api"
     depends_on:
       - spring-app
     networks:
