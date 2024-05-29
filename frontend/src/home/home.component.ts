@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule, NgModel } from '@angular/forms';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { interval } from 'rxjs/internal/observable/interval';
+import { switchMap } from 'rxjs/internal/operators/switchMap';
 
 @Component({
   selector: 'app-home',
@@ -20,34 +23,69 @@ export class HomeComponent {
   listings: Array<Listing> = [];
   private differ: IterableDiffer<Listing>;
   constructor(private apiService: ApiService,
-      private http: HttpClient,
-      private router: Router,
       private differs: IterableDiffers,
        private cdr: ChangeDetectorRef){
     this.differ = this.differs.find(this.listings).create();
     }
-  ngOnInit(){
-    this.apiService.getListings().subscribe(
-      (res) => {
-        if(Array.isArray(res)){
-          this.listings = res.map((body) =>{
-            const fields = body
-            return {
-              id: fields.id,
-              title: fields.title,
-              description: fields.description,
-              price: fields.price,
-              user: fields.user,
-              image_url: fields.image_url,
-              updated_date: fields.updated_date,
-              pub_date: fields.pub_date
-            } as Listing;
-          })
+    private refreshSubscription: Subscription | undefined;
+    ngOnInit(): void {
+      // Initial data retrieval
+      this.getData();
+  
+      // Fetch data every 10 seconds
+      this.refreshSubscription = interval(10000).pipe(
+        switchMap(() => this.apiService.getListings())
+      ).subscribe(
+        (res) => {
+          if (Array.isArray(res)) {
+            this.listings = res.map((body) => ({
+              id: body.id,
+              title: body.title,
+              description: body.description,
+              price: body.price,
+              user: body.user,
+              image_url: body.image_url,
+              updated_date: body.updated_date,
+              pub_date: body.pub_date
+            }));
+          }
+          console.log(res);
+        },
+        (error) => {
+          console.error('Error fetching listings:', error);
         }
-        console.log(res)
+      );
+    }
+  
+    ngOnDestroy(): void {
+      if (this.refreshSubscription) {
+        this.refreshSubscription.unsubscribe();
       }
-    )
-  }
+    }
+  
+    private getData(): void {
+      this.apiService.getListings().subscribe(
+        (res) => {
+          if (Array.isArray(res)) {
+            this.listings = res.map((body) => ({
+              id: body.id,
+              title: body.title,
+              description: body.description,
+              price: body.price,
+              user: body.user,
+              image_url: body.image_url,
+              updated_date: body.updated_date,
+              pub_date: body.pub_date
+            }));
+          }
+          console.log(res);
+        },
+        (error) => {
+          console.error('Error fetching listings:', error);
+        }
+      );
+    }
+  
   ngDoCheck(): void {
     const changes = this.differ.diff(this.listings);
     if (changes) {
