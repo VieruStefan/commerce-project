@@ -11,6 +11,8 @@ services:
       - $HOME/.aws/:/home/app/.aws/:ro
     networks:
       - my_network
+    condition:
+      - service_completed_successfully
 
   angular-app:
     build:
