@@ -93,7 +93,7 @@ export class CreateListingComponent {
     this.api.postListing(formDataListing).subscribe({
         complete: () => {
           console.info('complete');
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         },
         next: (res) => console.log(res),
         error: (e) => console.error('Error:', e)   
