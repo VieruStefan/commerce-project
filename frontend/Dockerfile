@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . .
 RUN npm install 
 RUN npm install -g @angular/cli@18.0.0
-# RUN ng build
+RUN ng build
 # RUN ng build
 CMD ["npm", "start"]            
 
