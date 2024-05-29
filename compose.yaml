@@ -18,11 +18,12 @@ services:
       dockerfile: Dockerfile
     container_name: angular-app
     ports:
-      - "80:80"  # Map host port 80 to container port 80
+      - "80:80"
     depends_on:
       - spring-app
     networks:
       - my_network
+    command: /bin/sh -c "while ! nc -z spring-app 7200; do sleep 3; done && ng build --prod"
 
 networks:
   my_network:
