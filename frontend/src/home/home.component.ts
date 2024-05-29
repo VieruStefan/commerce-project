@@ -33,7 +33,7 @@ export class HomeComponent {
       this.getData();
   
       // Fetch data every 10 seconds
-      this.refreshSubscription = interval(10000).pipe(
+      this.refreshSubscription = interval(100000).pipe(
         switchMap(() => this.apiService.getListings())
       ).subscribe(
         (res) => {
