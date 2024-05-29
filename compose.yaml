@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: angular-app
     ports:
-      - "4000:4000"
+      - "4200:4200"
     links:
       - "spring-app:oferte-directe.api"
     depends_on:
