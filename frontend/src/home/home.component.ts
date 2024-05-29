@@ -4,14 +4,14 @@ import { ListingCardComponent } from '../listing-card/listing-card.component';
 import { Listing } from '../listing/listing';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [ListingCardComponent, CommonModule,
      RouterLinkActive, RouterLink,
-    FormsModule],
+    FormsModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -20,6 +20,7 @@ export class HomeComponent {
   filteredListings: Array<Listing> = [];
   searchQuery = '';
   private differ: IterableDiffer<Listing>;
+
   constructor(private apiService: ApiService,
               private differs: IterableDiffers,
               private cdr: ChangeDetectorRef){
