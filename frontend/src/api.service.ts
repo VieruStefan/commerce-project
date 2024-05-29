@@ -26,7 +26,7 @@ export class ApiService {
     return this.http.post(`${this.url}/`, body)
   }
 
-  url_users: string = "http://54.243.193.76:7200/users";
+  url_users: string = "http://oferte-directe.api:7200/users";
 
   public getUsers(){
     return this.http.get(`${this.url_users}/`, this.httpOptions).pipe(
