@@ -1,7 +1,12 @@
 <div class="container">
+    <div class="search-bar">
+        <input type="text" placeholder="Căutați anunțuri..." id="search-bar-input" style="font-size:1.1rem">
+        <button type="button" id="search-button" [(ngModel)]="searchQuery" (input)="onSearchChange()" >Căutare</button>
+    </div>
+
     <div class="container">
         <div class="row">
-            <div class="col-md-3 mb-4" *ngFor="let listing of listings">
+            <div class="col-md-3 mb-4" *ngFor="let listing of filteredListings">
                 <app-listing-card [listing]="listing"></app-listing-card>
             </div>
         </div>

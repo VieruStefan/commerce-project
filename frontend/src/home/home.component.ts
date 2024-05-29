@@ -17,12 +17,15 @@ import { FormsModule } from '@angular/forms';
 })
 export class HomeComponent {
   listings: Array<Listing> = [];
+  filteredListings: Array<Listing> = [];
+  searchQuery = '';
   private differ: IterableDiffer<Listing>;
   constructor(private apiService: ApiService,
-      private differs: IterableDiffers,
-       private cdr: ChangeDetectorRef){
-    this.differ = this.differs.find(this.listings).create();
+              private differs: IterableDiffers,
+              private cdr: ChangeDetectorRef){
+      this.differ = this.differs.find(this.listings).create();
     }
+
   ngOnInit(){
     this.apiService.getListings().subscribe(
       (res) => {
@@ -40,11 +43,13 @@ export class HomeComponent {
               pub_date: fields.pub_date
             } as Listing;
           })
+          this.filteredListings = this.listings;
         }
         console.log(res)
       }
     )
   }
+
   ngDoCheck(): void {
     const changes = this.differ.diff(this.listings);
     if (changes) {
@@ -53,6 +58,16 @@ export class HomeComponent {
         this.updatePage();
       });
     }
+  }
+
+  filterListings(): void {
+    this.filteredListings = this.listings.filter(listing =>
+      listing.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+
+  onSearchChange(): void {
+    this.filterListings();
   }
 
   updatePage(): void {
