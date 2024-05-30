@@ -45,12 +45,6 @@ export class CreateListingComponent {
       email: ['', Validators.required],
       picture: [null]
     })
-    Swal.fire({
-      icon: 'error',
-      title: 'Error!',
-      text: 'Your application could not be submitted. Please try again later.'
-    }).then(() => {
-    });
   }
 
   onFileSelected(event: any) {
@@ -80,15 +74,13 @@ export class CreateListingComponent {
           this.submit_form(res)
         },
         error: (e) => {
-          console.error('Error fetching the user, creating a new one..', e)
-          // TODO: adauga alert (swal :smirk:)
-          ;(async () => {
-            await this.Toast.fire({
-              icon: 'warning',
-              title: 'Cont inexistent',
-              text: 'Contul dumneavoastra a fost creat'
-            })
-          })()
+          console.error('Error fetching the user, creating a new one..', e)                
+          Swal.fire({
+            icon: 'warning',
+            title: 'Cont inexistent',
+            text: 'Contul dumneavoastra a fost creat.'
+          }).then(() => {
+          });
           this.api.postUser(
             {
               firstName: firstName,
@@ -124,16 +116,13 @@ export class CreateListingComponent {
         },
         next: (res) =>{ 
           console.log(res)
-          ;(async () => {
-            await this.Toast.fire({
-              icon: 'success',
-              title: 'Succes',
-              text: 'Anuntul dumneavoastra a fost publicat!'
-            }).then(() => {
-                this.router.navigate(['/home']);
-              }
-            );
-          })
+          Swal.fire({
+            icon: 'success',
+            title: 'Your application has been submitted!',
+            text: 'Thank you for applying. Please check your email and consider subscribing to receive future job alerts.',
+          }).then(() => {
+            window.location.href = "/home";
+          });
       },
         error: (e) => console.error('Error:', e)   
       }
