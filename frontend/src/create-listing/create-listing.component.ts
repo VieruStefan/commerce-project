@@ -4,8 +4,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2'
-import './styles.css'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-listing',
