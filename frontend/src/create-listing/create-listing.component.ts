@@ -114,22 +114,21 @@ export class CreateListingComponent {
     }
     this.api.postListing(formDataListing).subscribe({
         complete: () => {
+          console.info('complete');
+        },
+        next: (res) =>{ 
+          console.log(res)
           ;(async () => {
             await this.Toast.fire({
               icon: 'success',
               title: 'Succes',
               text: 'Anuntul dumneavoastra a fost publicat!'
-            }).then((result) => {
-              if (result.isConfirmed) {
+            }).then(() => {
                 this.router.navigate(['/home']);
-              } else if (result.isDenied) {
-                Swal.fire("Changes are not saved", "", "info");
               }
-            });
+            );
           })
-          console.info('complete');
-        },
-        next: (res) => console.log(res),
+      },
         error: (e) => console.error('Error:', e)   
       }
     );
