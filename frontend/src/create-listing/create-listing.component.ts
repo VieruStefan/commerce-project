@@ -45,6 +45,12 @@ export class CreateListingComponent {
       email: ['', Validators.required],
       picture: [null]
     })
+    Swal.fire({
+      icon: 'error',
+      title: 'Error!',
+      text: 'Your application could not be submitted. Please try again later.'
+    }).then(() => {
+    });
   }
 
   onFileSelected(event: any) {
