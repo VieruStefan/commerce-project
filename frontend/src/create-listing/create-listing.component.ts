@@ -118,8 +118,7 @@ export class CreateListingComponent {
           console.log(res)
           Swal.fire({
             icon: 'success',
-            title: 'Your application has been submitted!',
-            text: 'Thank you for applying. Please check your email and consider subscribing to receive future job alerts.',
+            title: 'Anunț creat cu succes!'
           }).then(() => {
             window.location.href = "/home";
           });
