@@ -79,7 +79,8 @@ export class CreateListingComponent {
           ;(async () => {
             await this.Toast.fire({
               icon: 'warning',
-              title: 'Warning',
+              title: 'Cont inexistent',
+              text: 'Contul dumneavoastra a fost creat'
             })
           })()
           this.api.postUser(
@@ -116,8 +117,15 @@ export class CreateListingComponent {
           ;(async () => {
             await this.Toast.fire({
               icon: 'success',
-              title: 'Success',
-            })
+              title: 'Succes',
+              text: 'Anuntul dumneavoastra a fost publicat!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['/home']);
+              } else if (result.isDenied) {
+                Swal.fire("Changes are not saved", "", "info");
+              }
+            });
           })
           console.info('complete');
         },
