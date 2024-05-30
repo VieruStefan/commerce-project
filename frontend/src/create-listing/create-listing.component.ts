@@ -113,8 +113,13 @@ export class CreateListingComponent {
     }
     this.api.postListing(formDataListing).subscribe({
         complete: () => {
+          ;(async () => {
+            await this.Toast.fire({
+              icon: 'success',
+              title: 'Success',
+            })
+          })
           console.info('complete');
-          this.router.navigate(['/home']);
         },
         next: (res) => console.log(res),
         error: (e) => console.error('Error:', e)   
