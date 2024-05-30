@@ -4,6 +4,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
+import './styles.css'
 
 @Component({
   selector: 'app-create-listing',
@@ -16,6 +18,19 @@ export class CreateListingComponent {
   formListing!: FormGroup;
   file!: File;
   fileName!: string;
+
+  
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    iconColor: 'white',
+    customClass: {
+      popup: 'colored-toast',
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+  })
 
   constructor(private formBuilder: FormBuilder,
      private api: ApiService,
@@ -60,7 +75,14 @@ export class CreateListingComponent {
           this.submit_form(res)
         },
         error: (e) => {
-          console.error('Error fetching the user, creating new one..', e)
+          console.error('Error fetching the user, creating a new one..', e)
+          // TODO: adauga alert (swal :smirk:)
+          ;(async () => {
+            await this.Toast.fire({
+              icon: 'warning',
+              title: 'Warning',
+            })
+          })()
           this.api.postUser(
             {
               firstName: firstName,
