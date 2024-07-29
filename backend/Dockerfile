@@ -1,28 +1,8 @@
-FROM python:3.12-slim
-
-ENV PYTHONUNBUFFERED 1
-
+FROM maven:3.9.3-eclipse-temurin-17
 WORKDIR /app
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    build-essential \
-    curl \
-    libpq-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN curl -sSL https://install.python-poetry.org | python3 -
-
-ENV PATH="/root/.local/bin:$PATH"
-
-COPY ./mysite /app
-
-COPY pyproject.toml poetry.lock /app/
-
-RUN poetry config virtualenvs.create false \
-    && poetry install --no-interaction --no-ansi
-RUN poetry run python manage.py migrate
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
 EXPOSE 7200
-CMD ["python", "manage.py", "runserver", "0.0.0.0:7200"]
+CMD ["mvn", "spring-boot:run"]

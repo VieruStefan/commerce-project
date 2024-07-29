@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: black; 
+  }
+  img{
+    width: auto;
+    height: 82vh;
+  }
+ h1{
+    font-size: 4rem;
+ }
+ .text-overlay {
+    position: absolute;
+    top: 17%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    color: white; /* Or any color that contrasts well with your image */
+}
+//  body{
+//     background-image: url('https://cdn.shopify.com/s/files/1/0070/7032/files/ecommerce_20shopping_20cart.png');
+//     background-repeat: no-repeat;
+//  }

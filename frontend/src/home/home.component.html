@@ -1,47 +1,12 @@
 <div class="container">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 mb-4" *ngFor="let listing of listings">
-                <app-listing-card [listing]="listing"></app-listing-card>
-            </div>
+    <div class="search-bar mb-4">
+        <input type="text" class="form-control" placeholder="Căutați anunțuri..." id="search-bar-input" [(ngModel)]="searchQuery" (input)="onSearchChange()">
+        <!-- <button type="button" class="btn btn-primary" id="search-button">Căutare</button> -->
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 mb-4" *ngFor="let listing of filteredListings">
+            <app-listing-card [listing]="listing"></app-listing-card>
         </div>
     </div>
-<!-- login.component.html -->
-<div class="container">
-    <h2>Login</h2>
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          class="form-control"
-          required
-          [(ngModel)]="loginData.username"
-          #username="ngModel"
-        />
-        <div *ngIf="username.invalid && username.touched" class="alert alert-danger">
-          Username is required.
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          class="form-control"
-          required
-          [(ngModel)]="loginData.password"
-          #password="ngModel"
-        />
-        <div *ngIf="password.invalid && password.touched" class="alert alert-danger">
-          Password is required.
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
-    </form>
-  </div>
-  
 </div>

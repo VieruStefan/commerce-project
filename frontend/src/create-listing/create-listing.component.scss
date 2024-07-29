@@ -1,20 +1,136 @@
+/* Container styling */
 .container {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 1rem;
-    font-family:Arial, Helvetica, sans-serif;
-    color: rgb(9, 10, 9);
-    padding: 20px;
-    background-color: #dfe4eb;
-    justify-content: center;
-    align-items: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px; 
-    max-width: 900px;
-   
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form container styling */
+.form-container {
+  padding: 20px;
+}
+
+/* Form control styling */
+.form-control {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Floating label styling */
+.form-floating {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-floating label {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  height: 100%;
+  padding: 10px 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  color: #aaa;
+  font-size: 16px;
+}
+
+.form-floating input:not(:placeholder-shown) + label,
+.form-floating input:focus + label {
+  top: -20px;
+  left: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Custom button styling */
+.custom-button {
+  display: inline-block;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #0056b3;
+}
+
+/* File upload styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-group input[type="file"] {
+  display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .container {
+      padding: 10px;
   }
+
+  .form-control {
+      padding: 8px 12px;
+  }
+
+  .custom-button {
+      font-size: 16px;
+  }
+}
+
 
   .file-input {
     display: none;
   }
+
+  .colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+  }
+  
+  .colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+  }
+  
+  .colored-toast.swal2-icon-warning {
+    background-color: #f8bb86 !important;
+  }
+  
+  .colored-toast.swal2-icon-info {
+    background-color: #3fc3ee !important;
+  }
+  
+  .colored-toast.swal2-icon-question {
+    background-color: #87adbd !important;
+  }
+  
+  .colored-toast .swal2-title {
+    color: white;
+  }
+  
+  .colored-toast .swal2-close {
+    color: white;
+  }
+  
+  .colored-toast .swal2-html-container {
+    color: white;
+  }
+  
