@@ -1,7 +1,5 @@
 package commerce.e
 
-import commerce.e.model.listing.ListingRepository
-import commerce.e.model.listing.MockListingRepository
 import commerce.e.model.listing.PostgresListingRepository
 import commerce.e.plugins.*
 import io.ktor.server.application.*

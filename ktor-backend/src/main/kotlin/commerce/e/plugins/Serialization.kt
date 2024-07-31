@@ -1,10 +1,8 @@
 package commerce.e.plugins
 
-import com.fasterxml.jackson.databind.*
 import commerce.e.model.listing.Listing
 import commerce.e.model.listing.ListingRepository
 import io.ktor.http.*
-import io.ktor.serialization.jackson.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
